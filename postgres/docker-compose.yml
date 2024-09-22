@@ -1,0 +1,24 @@
+services:
+  postgres:
+    build:
+        context: .
+        dockerfile: Dockerfile
+    image: postgresim:latest
+    container_name: postgresc
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: postgresdb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - postgres-network
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres-network:
+    driver: bridge
